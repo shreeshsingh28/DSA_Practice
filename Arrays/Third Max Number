@@ -1,0 +1,32 @@
+Question - https://leetcode.com/problems/third-maximum-number/
+
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) 
+    {
+        std::sort(nums.begin(),nums.end());
+        set<int> s;
+        for(int i=0 ; i< nums.size() ; i++)
+            s.insert(nums[i]);
+
+
+        if(s.size() >= 3)
+        {
+            int index=s.size()-3;
+            auto third_maximum=next(s.begin(),index);
+            return *third_maximum;
+        }
+        else if(s.size() ==1)
+        {
+            auto a = s.begin();
+            return *a;
+        }
+        else 
+        {
+            auto a = s.begin();
+            a++;
+            return *a;
+
+        }  
+    }
+};
