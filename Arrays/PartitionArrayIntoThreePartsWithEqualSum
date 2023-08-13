@@ -1,0 +1,40 @@
+Question - https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/description/
+
+class Solution {
+public:
+    bool canThreePartsEqualSum(vector<int>& arr) 
+    {
+        int sum=0;
+        map<int,int> mp;
+
+        for(int i=0 ; i<arr.size() ; i++)
+        {
+            sum = sum + arr[i];
+            mp[arr[i]]++;
+        }
+
+        if(arr[0]==0 && mp.size()==1)
+            return true;
+
+
+        if(sum%3 != 0)
+            return false;
+
+        int target = sum/3;
+        int i,cnt=0,currsum=0;
+
+
+        for(i=0 ; i<arr.size() ; i++)
+        {
+            currsum = currsum + arr[i];
+            if(currsum == target)
+            {
+                currsum=0;
+                cnt++;
+            }
+            if(cnt==2 && i<arr.size()-1)
+                return true;
+        }
+        return false;
+    }
+};
