@@ -1,0 +1,31 @@
+Question - https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
+
+class Solution {
+public:
+     int lowerbnd(vector<int>&nums , int l, int h, int target)     //returns lower bound of target
+     {
+        while(l<=h)
+        {
+            int mid = (l+h)/2;
+            if(nums[mid] < target)
+                l = mid+1;
+            else
+                h=mid-1; 
+        }
+        return l;
+     }
+
+    vector<int> searchRange(vector<int>& nums, int target) 
+    {
+        int l=0;
+        int h =nums.size()-1;
+        int stp = lowerbnd(nums,l,h,target);
+        int endp = lowerbnd(nums,l,h,target+1)-1;
+        
+        if(stp < nums.size() && nums[stp] == target)
+            return {stp,endp};
+        else
+            return {-1,-1};
+        
+    }
+};
